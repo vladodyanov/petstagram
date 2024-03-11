@@ -130,3 +130,5 @@ LOGGING = {
         }
     }
 }
+
+AUTH_USER_MODEL = 'accounts.PetstagramUser'
