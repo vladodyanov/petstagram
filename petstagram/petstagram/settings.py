@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from django.contrib import staticfiles
+from django.urls import reverse_lazy
 
 # `BASE_DIR` should always point to the `manage.py` directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,6 +87,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = ()
+
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -132,3 +135,7 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'accounts.PetstagramUser'
+
+LOGIN_REDIRECT_URL = reverse_lazy("index")
+LOGIN_URL = reverse_lazy("signin user")
+LOGOUT_REDIRECT_URL = reverse_lazy("index")

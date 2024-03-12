@@ -7,17 +7,13 @@
         <div class="login-register-box">
             <h1>Petstagram</h1>
 
-            <form action="#">
-                <p>
-                    <label for="id_username">Username:</label>
-                    <input type="text" placeholder="Username">
-                </p>
-                <p>
-                    <label for="id_password">Password:</label>
-                    <input type="password" placeholder="Password">
-                </p>
-
+            <form action="{% url 'signin user' %}?next={{ next }}">
+                {{ form.as_p }}
+              
                 <button type="submit">Log in</button>
+                
+                {% csrf_token %}
+                
             </form>
 
         </div>
