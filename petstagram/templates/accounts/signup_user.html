@@ -12,17 +12,17 @@
 
             <form action="{% url 'signup user' %}" method="post">
                 <p>
-                    {{ form.email|placeholder:"Email" }}
+                    {{ form.email|placeholder:'Email:' }}
                 </p>
                 <p>
-                    {{ form.password1|placeholder:"Password" }}
+                    {{ form.password1|placeholder:'Password:' }}
                 </p>
-
                 <p>
-                    {{ form.password2|placeholder:"Confirm password" }}
+                    {{ form.password2|placeholder:'Confirm password:' }}
                 </p>
 
                 <button type="submit">Register</button>
+                
                 {% csrf_token %}
             </form>
 

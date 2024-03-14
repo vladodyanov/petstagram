@@ -14,7 +14,7 @@
             </a>
             <h3>
                 <a href="{% url 'details profile' pk=1 %}">
-                    Doncho
+                    Diyan Kalaydzhiev
                 </a>
                 <br>
                 <span>{{ photo.location }}</span>
@@ -45,7 +45,7 @@
         <p class="likes">{{ photo.photolike_set.count }} likes</p>
 
         {% for pet in photo.pets.all %}
-            <a href="{% url 'details pet' username='Doncho' pet_slug=pet.slug %}">
+            <a href="{% url 'details pet' username='max' pet_slug=pet.slug %}">
                 <p class="message">
                     <b>{{ pet.name }}</b>
                 </p>

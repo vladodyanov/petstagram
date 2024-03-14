@@ -1,26 +1,12 @@
-from django.contrib.auth.hashers import make_password
 from django.db import models
-
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import models as auth_models
+from petstagram.accounts.managers import PetstagramUserManager
 
 from django.utils import timezone
 
-from petstagram.accounts.managers import PetstagramUserManager
-
-'''
-# Auth in Django:
-
-1. Use built-in user - works out-of-the-box
-2. Use built-in user only for auth and define `Profile` model for user data
-3. Define a custom user model for auth and define `Profile` model for user data  
-'''
-
 
 class PetstagramUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
-    # password from `AbstractBaseUser`
-    # last_login from `AbstractBaseUser`
-
     email = models.EmailField(
         _("email address"),
         unique=True,
@@ -62,12 +48,12 @@ class Profile(models.Model):
 
     date_of_birth = models.DateField(
         blank=True,
-        null=True,
+        null=True
     )
 
     profile_picture = models.URLField(
         blank=True,
-        null=True,
+        null=True
     )
 
     user = models.OneToOneField(
@@ -75,10 +61,3 @@ class Profile(models.Model):
         primary_key=True,
         on_delete=models.CASCADE,
     )
-
-    @property
-    def full_name(self):
-        if self.first_name and self.last_name:
-            return f'{self.first_name} {self.last_name}'
-
-        return self.first_name or self.last_name

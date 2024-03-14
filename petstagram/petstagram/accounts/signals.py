@@ -20,4 +20,3 @@ def user_created(sender, instance, created, **kwargs):
     # profile = Profile(user=instance)
     # Can run other code
     # profile.save()
-
