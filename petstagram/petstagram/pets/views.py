@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 
+from petstagram.core.view_mixins import OwnerRequiredMixin
 from petstagram.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from petstagram.pets.models import Pet
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django import forms
+from django.contrib.auth import mixins as auth_mixins
 
 
 # def create_pet(request):
@@ -21,7 +23,7 @@ from django import forms
 #
 #     return render(request, "pets/create_pet.html", context)
 
-class CreatePetView(views.CreateView):
+class CreatePetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Pet
     form_class = PetCreateForm
     template_name = 'pets/create_pet.html'
@@ -29,19 +31,24 @@ class CreatePetView(views.CreateView):
     def get_success_url(self):
         return reverse_lazy('details profile', kwargs={'username': 'max', 'pet_slug': self.object.slug})
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        return super().form_valid(form)
 
-class PetDetailView(views.DetailView):
+
+class PetDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
     queryset = Pet.objects.all() \
-    .prefetch_related('petphoto_set') \
-    .prefetch_related('petphoto_set__photolike_set') \
-    .prefetch_related('petphoto_set__pets')
+        .prefetch_related('petphoto_set') \
+        .prefetch_related('petphoto_set__photolike_set') \
+        .prefetch_related('petphoto_set__pets')
 
     template_name = 'pets/details_pet.html'
     context_object_name = 'pet'
     slug_url_kwarg = 'pet_slug'
 
 
-class PetEditView(views.UpdateView):
+class PetEditView(OwnerRequiredMixin, auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Pet
     form_class = PetEditForm
     template_name = 'pets/edit_pet.html'
@@ -52,7 +59,7 @@ class PetEditView(views.UpdateView):
         return reverse_lazy('details pet', kwargs={'username': 'max', 'pet_slug': self.object.slug})
 
 
-class PetDeleteView(views.DeleteView):
+class PetDeleteView(OwnerRequiredMixin, auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Pet
     form_class = PetDeleteForm
     template_name = 'pets/delete_pet.html'
@@ -77,11 +84,6 @@ class PetDeleteView(views.DeleteView):
     #     context['form'] = form
     #
     #     return context
-
-
-
-
-
 
 # def edit_pet(request, username, pet_slug):
 #     pet = Pet.objects.filter(slug=pet_slug) \

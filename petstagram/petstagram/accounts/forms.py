@@ -14,3 +14,7 @@ class PetstagramUserCreationForm(auth_forms.UserCreationForm):
         self.user = super().save(*args, **kwargs)
         return self.user
 
+
+class PetstagramChangeForm(auth_forms.UserChangeForm):
+    class Meta(auth_forms.UserChangeForm.Meta):
+        model = UserModel

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="db" uuid="dafc59df-bb56-46fb-876f-5976851879ea">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>e0565e3e-3031-4e6c-b563-0f76e0a129d0</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\vlado\PycharmProjects\Advanced_module\TKINTER\simple_calculator_by_vd\petstagram\petstagram\db.sqlite3</jdbc-url>
