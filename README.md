@@ -52,7 +52,7 @@ TBV
 <img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2007.jpg" />
 
 ## Setup
-To set up the Speech Therapy Center locally, follow these steps:
+To set up the Petstagram, follow these steps:
 1. Clone the repository
 2. Navigate to the project directory
 3. Install the required dependencies:
