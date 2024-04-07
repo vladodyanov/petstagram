@@ -37,7 +37,19 @@ To ensure a personalized experience, each user retains the capability to manage 
 TBV
 
 ## Screenshots
-TBC
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2001.jpg" />
+
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2002.jpg" />
+
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2003.jpg" />
+
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2004.jpg" />
+
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2005.jpg" />
+
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2006.jpg" />
+
+<img align="center" width=480px  alt="home page view" src="https://github.com/vladodyanov/petstagram/blob/main/petstagram/staticfiles/screenshots/Screenshot%20Petstagram%2007.jpg" />
 
 ## Setup
 To set up the Speech Therapy Center locally, follow these steps:
