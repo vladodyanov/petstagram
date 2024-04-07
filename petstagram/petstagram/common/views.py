@@ -1,36 +1,41 @@
-from django.shortcuts import render, redirect
-from django.views import generic as views
+from django.contrib.auth import authenticate
+from django.contrib.auth.views import LoginView
+from django.core.mail import send_mail
+from django.shortcuts import redirect
+
 from petstagram.common.models import PhotoLike
-from petstagram.pets.models import Pet
+
+from django.views import generic as views
+
+
 from petstagram.photos.models import PetPhoto
 
 
-# def index(request):
-#     pet_name_pattern = request.GET.get('pet_name_pattern', None)
-#
-#     pet_photos = PetPhoto.objects.all()
-#
-#     if pet_name_pattern:
-#         pet_photos = pet_photos.filter(pets__name__icontains=pet_name_pattern)
-#
-#     context = {
-#         "pet_photos": pet_photos,
-#         "pet_name_pattern": pet_name_pattern,
-#     }
-#
-#     return render(request, "common/index.html", context)
-
 class IndexView(views.ListView):
+    # send_mail(
+    #     subject="It works!",
+    #     message="It works without HTML",
+    #     from_email="doncho@ambitioned.com",
+    #     recipient_list=["jojobod584@centerf.com"],
+    #     html_message="<h1>It works with HTML!</h1>",
+    #     fail_silently=False,
+    # )
     queryset = PetPhoto.objects.all() \
-        .prefetch_related('pets') \
-        .prefetch_related('photolike_set')
-    template_name = 'common/index.html'
+        .order_by("-created_at") \
+        .prefetch_related("pets") \
+        .prefetch_related("photolike_set")
+
+    template_name = "common/index.html"
 
     paginate_by = 1
 
+    @property
+    def pet_name_pattern(self):
+        return self.request.GET.get("pet_name_pattern", None)
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['pet_name_pattern'] = self.request.GET.get('pet_name_pattern', None)
+        context["pet_name_pattern"] = self.pet_name_pattern or ""
         return context
 
     def get_queryset(self):
@@ -41,7 +46,7 @@ class IndexView(views.ListView):
         return queryset
 
     def filter_by_pet_name_pattern(self, queryset):
-        pet_name_pattern = self.request.GET.get('pet_name_pattern', None)
+        pet_name_pattern = self.pet_name_pattern
 
         filter_query = {}
 
@@ -52,7 +57,6 @@ class IndexView(views.ListView):
 
 
 def like_pet_photo(request, pk):
-    # pet_photo_like = PhotoLike.objects.first(pk=pk, user=request.user)
     pet_photo_like = PhotoLike.objects \
         .filter(pet_photo_id=pk) \
         .first()
